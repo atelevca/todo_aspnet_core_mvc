@@ -1,0 +1,51 @@
+﻿@using ASP.NET_Core_TODO_List.Models.Entities
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<TodoItem>
+
+<h1>Here's your list</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>DueDate</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Title</td>
+                <td>@s.Description</td>
+                <td>
+                    @switch (s.Priority)
+                    {
+                        case 1:
+                            <p>High</p>
+                            break;
+                        case 2:
+                            <p>Medium</p>
+                            break;
+                        case 3:
+                            <p>Low</p>
+                            break;
+                    }
+                <td>@s.DueDate</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Todo" asp-action="Edit" asp-route-id="@s.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-success" asp-controller="Todo" asp-action="Add">Add New Todo Item</a>
